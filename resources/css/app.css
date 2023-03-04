@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mb-1 {
+    margin-top: .25rem
+}
+
+tr:nth-child(even):not(.bg-red-100) {
+    @apply bg-gray-50;
+}
+
+.bg-red-100 {
+    background-color: rgb(220 38 38 / 0.1);
+}
+
+.min-w-48 {
+    min-width: 12rem
+}
+
+@media (min-width: 1024px) {
+    .lg\:inline {
+        display: inline;
+    }
+
+    .lg\:ml-0 {
+        margin-left: 0;
+    }
+}
