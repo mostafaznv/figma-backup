@@ -33,6 +33,6 @@ class SendBackupNotification extends Notification implements ShouldQueue
             ->line("*Size:* {$size}MB")
             ->line("*Datetime:* $datetime")
             ->disableNotification()
-            ->file($this->backup->link, $this->backup->name);
+            ->document($this->backup->link, $this->backup->name);
     }
 }
