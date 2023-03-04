@@ -26,7 +26,7 @@ class FigmaBackupCommand extends Command
     private readonly string $workingDirectory;
 
     private const BACKUP_DISK = 'backups';
-    private const FIGMA_DISK  = 'backups';
+    private const FIGMA_DISK  = 'figma';
     private const TIMEOUT     = 3600;
 
     public function __construct()
@@ -73,7 +73,7 @@ class FigmaBackupCommand extends Command
             $files = $this->getFigFiles();
 
             foreach ($files as $file) {
-                $name = $file->getBasename() . ' - ' . now()->toDateTimeString() . $file->getExtension();
+                $name = $project->slug . ' - ' . now()->toDateTimeString() . '.' . $file->getExtension();
                 $path = "$project->slug/$name";
 
                 $stored = $this->storeFigFile($path, $file);
