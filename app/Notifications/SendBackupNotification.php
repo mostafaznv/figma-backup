@@ -22,15 +22,13 @@ class SendBackupNotification extends Notification implements ShouldQueue
 
     public function toTelegram($notifiable)
     {
-        $telegramId = config('settings.telegram-to');
-
         $projectName = $this->backup->project->name;
         $size = byteToMb($this->backup->size);
         $datetime = $this->backup->created_at->format('Y-m-d H:i:s');
 
 
         return TelegramMessage::create()
-            ->to($telegramId)
+            ->to($notifiable)
             ->content("*$projectName*")
             ->line("*Size:* {$size}MB")
             ->line("*Datetime:* $datetime")
