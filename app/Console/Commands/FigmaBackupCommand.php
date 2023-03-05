@@ -69,7 +69,7 @@ class FigmaBackupCommand extends Command
 
     private function backup(Project $project): void
     {
-        $process = $this->runCommand($project->figma_id);
+        $process = $this->cmd($project->figma_id);
 
         if ($process->isSuccessful()) {
             $files = $this->getFigFiles();
@@ -103,7 +103,7 @@ class FigmaBackupCommand extends Command
         }
     }
 
-    private function runCommand(int|string $projectId): Process
+    private function cmd(int|string $projectId): Process
     {
         $process = new Process([
             'figma-backup',
