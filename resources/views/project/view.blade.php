@@ -47,8 +47,6 @@
                                         <small>KB</small>
                                     </th>
 
-                                    </th>
-
                                     <th scope="col" class="pb-3 px-6 text-base">{{ __('Date') }}</th>
                                     <th scope="col" class="pb-3 px-6 text-base"></th>
                                 </tr>
