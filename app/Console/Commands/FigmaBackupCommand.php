@@ -93,9 +93,9 @@ class FigmaBackupCommand extends Command
 
                     $this->notify($backup);
                 }
-
-                $this->deleteOldFigFile($file);
             }
+
+            $this->cleanup();
         }
         else {
             $this->error($process->getErrorOutput());
@@ -133,9 +133,13 @@ class FigmaBackupCommand extends Command
         return Storage::disk(self::BACKUP_DISK)->put($path, $file->getContent());
     }
 
-    private function deleteOldFigFile(string $path): void
+    private function cleanup(): void
     {
-        Storage::disk(self::FIGMA_DISK)->delete($path);
+        $directories = Storage::disk(self::FIGMA_DISK)->allDirectories('figma-backup-root/backups');
+
+        foreach ($directories as $directory) {
+            Storage::disk(self::FIGMA_DISK)->deleteDirectory($directory);
+        }
     }
 
     /**
