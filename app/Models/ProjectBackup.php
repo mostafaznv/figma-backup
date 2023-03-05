@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\ProjectBackupObserver;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,11 @@ class ProjectBackup extends Model
     protected $fillable = [
         'project_id', 'name', 'path', 'size'
     ];
+
+    public static function booted()
+    {
+        ProjectBackup::observe(ProjectBackupObserver::class);
+    }
 
     protected function link(): Attribute
     {
