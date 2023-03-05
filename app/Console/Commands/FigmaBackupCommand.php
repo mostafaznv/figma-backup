@@ -152,8 +152,9 @@ class FigmaBackupCommand extends Command
 
         foreach ($files as $file) {
             $isFigFile = Str::endsWith($file, '.fig');
+            $isJamFile = Str::endsWith($file, '.jam');
 
-            if ($isFigFile) {
+            if ($isFigFile or $isJamFile) {
                 $path = Storage::disk(self::FIGMA_DISK)->path($file);
                 $figFiles[] = new UploadedFile($path, basename($path));
             }
