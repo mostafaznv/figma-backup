@@ -24,7 +24,7 @@ class SendBackupNotification extends Notification implements ShouldQueue
     public function toTelegram($notifiable)
     {
         $projectName = $this->backup->project->name;
-        $type = $this->backup->type;
+        $type = $this->backup->type->name;
         $size = byteToMb($this->backup->size);
         $datetime = $this->backup->created_at->format('Y-m-d H:i:s');
         $hashtag = $this->backup->project->hashtag;
