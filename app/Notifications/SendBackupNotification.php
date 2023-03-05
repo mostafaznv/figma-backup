@@ -33,7 +33,8 @@ class SendBackupNotification extends Notification implements ShouldQueue
                 ->content("*$projectName*")
                 ->line("*Size:* {$size}MB")
                 ->line("*Datetime:* $datetime")
-                ->button('Download', $this->backup->link)
+                ->line('')
+                ->line("[Download]({$this->backup->link})")
                 ->disableNotification();
         }
         else {
