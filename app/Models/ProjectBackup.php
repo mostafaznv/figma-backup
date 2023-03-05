@@ -20,6 +20,23 @@ class ProjectBackup extends Model
         );
     }
 
+    protected function fullPath(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => Storage::disk('backups')->path($attributes['path'])
+        );
+    }
+
+    protected function isLarge(): Attribute
+    {
+        $bytesInMb = config('settings.bytes-in-mb');
+        $limitation = 49 * $bytesInMb;
+
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $attributes['size'] > $limitation
+        );
+    }
+
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
