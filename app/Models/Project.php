@@ -30,6 +30,6 @@ class Project extends Model
 
     public function backups(): HasMany
     {
-        return $this->hasMany(ProjectBackup::class);
+        return $this->hasMany(ProjectBackup::class)->orderByDesc('id');
     }
 }
