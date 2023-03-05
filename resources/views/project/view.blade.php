@@ -36,6 +36,7 @@
                                 <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                                 <tr class="border-b">
                                     <th scope="col" class="pb-3 px-6 text-base">{{ __('Name') }}</th>
+                                    <th scope="col" class="pb-3 px-6 text-base">{{ __('Type') }}</th>
 
                                     <th scope="col" class="pb-3 px-6 text-base">
                                         <span>{{ __('Size') }}</span>
@@ -59,6 +60,7 @@
                                         @class(['border-b' => !$loop->last])
                                     >
                                         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $backup->name }}</th>
+                                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $backup->type->name }}</th>
                                         <td class="py-4 px-6">{{ byteToMb($backup->size) }}</td>
                                         <td class="py-4 px-6">{{ byteToKb($backup->size) }}</td>
                                         <td class="py-4 px-6">{{ $backup->created_at->format('Y-m-d H:i:s') }}</td>

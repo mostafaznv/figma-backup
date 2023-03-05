@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\FileType;
 use App\Observers\ProjectBackupObserver;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,10 @@ class ProjectBackup extends Model
         'project_id', 'name', 'path', 'size'
     ];
 
+    protected $casts = [
+        'type' => FileType::class
+    ];
+
     public static function booted()
     {
         ProjectBackup::observe(ProjectBackupObserver::class);
@@ -22,14 +27,14 @@ class ProjectBackup extends Model
     protected function link(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => Storage::disk('backups')->url($attributes['path'])
+            get: fn(mixed $value, array $attributes) => Storage::disk('backups')->url($attributes['path'])
         );
     }
 
     protected function fullPath(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => Storage::disk('backups')->path($attributes['path'])
+            get: fn(mixed $value, array $attributes) => Storage::disk('backups')->path($attributes['path'])
         );
     }
 
@@ -39,7 +44,7 @@ class ProjectBackup extends Model
         $limitation = 49 * $bytesInMb;
 
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => $attributes['size'] > $limitation
+            get: fn(mixed $value, array $attributes) => $attributes['size'] > $limitation
         );
     }
 

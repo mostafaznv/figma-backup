@@ -46,3 +46,16 @@ if (!function_exists('pascalCase')) {
         return \Illuminate\Support\Str::of($str)->camel()->ucfirst();
     }
 }
+
+if (!function_exists('enumToNames')) {
+    /**
+     * Returns an array of enum names
+     *
+     * @param UnitEnum[] $enums
+     * @return array
+     */
+    function enumToNames(array $enums): array
+    {
+        return array_column($enums, 'name');
+    }
+}
