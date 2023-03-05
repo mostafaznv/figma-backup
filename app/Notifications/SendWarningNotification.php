@@ -14,6 +14,7 @@ class SendWarningNotification extends Notification implements ShouldQueue
     public function __construct(
         private readonly string $title,
         private readonly string $message,
+        private readonly ?string $hashtag = null
     ) {}
 
     public function via($notifiable): array
@@ -24,7 +25,7 @@ class SendWarningNotification extends Notification implements ShouldQueue
 
     public function toTelegram($notifiable)
     {
-        $datetime = $this->backup->created_at->format('Y-m-d H:i:s');
+        $datetime = now()->toDateTimeString();
 
         return TelegramMessage::create()
             ->to($notifiable)
@@ -32,6 +33,6 @@ class SendWarningNotification extends Notification implements ShouldQueue
             ->line($this->message)
             ->line('')
             ->line("*Datetime:* $datetime")
-            ->line($this->backup->project->slug);
+            ->line($this->hashtag);
     }
 }

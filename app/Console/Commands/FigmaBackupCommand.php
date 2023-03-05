@@ -58,7 +58,7 @@ class FigmaBackupCommand extends Command
                 catch (Exception $e) {
                     $this->error($e->getMessage());
 
-                    $this->warning($project->name, $e->getMessage());
+                    $this->warning($project->name, $e->getMessage(), $project->hashtag);
                 }
             }
         });
@@ -99,7 +99,7 @@ class FigmaBackupCommand extends Command
         }
         else {
             $this->error($process->getErrorOutput());
-            $this->warning($project->name, $process->getErrorOutput());
+            $this->warning($project->name, $process->getErrorOutput(), $project->hashtag);
         }
     }
 
@@ -163,8 +163,8 @@ class FigmaBackupCommand extends Command
         Notification::send($this->telegramIds, new SendBackupNotification($backup));
     }
 
-    private function warning(string $title, string $message): void
+    private function warning(string $title, string $message, ?string $hashtag = null): void
     {
-        Notification::send($this->telegramIds, new SendWarningNotification($title, $message));
+        Notification::send($this->telegramIds, new SendWarningNotification($title, $message, $hashtag));
     }
 }
