@@ -32,6 +32,7 @@ class SendBackupNotification extends Notification implements ShouldQueue
             return TelegramMessage::create()
                 ->to($notifiable)
                 ->content("*$projectName*")
+                ->line('')
                 ->line("*Size:* {$size}MB")
                 ->line("*Datetime:* $datetime")
                 ->line('')
@@ -44,6 +45,7 @@ class SendBackupNotification extends Notification implements ShouldQueue
             *$projectName*
             *Size:* {$size}MB
             *Datetime:* $datetime
+
             $hashtag
             MARKDOWN;
 
