@@ -24,7 +24,6 @@ class SendBackupNotification extends Notification implements ShouldQueue
     public function toTelegram($notifiable)
     {
         $projectName = $this->backup->project->name;
-        $fileName = $this->backup->name;
         $size = byteToMb($this->backup->size);
         $datetime = $this->backup->created_at->format('Y-m-d H:i:s');
         $hashtag = $this->backup->project->hashtag;
@@ -32,9 +31,10 @@ class SendBackupNotification extends Notification implements ShouldQueue
         if ($this->backup->is_large) {
             return TelegramMessage::create()
                 ->to($notifiable)
-                ->content("*$fileName*")
+                ->content("*$projectName*")
                 ->line('')
                 ->line("*Size:* {$size}MB")
+                ->line("*Datetime:* $datetime")
                 ->line('')
                 ->line("[Download]({$this->backup->link})")
                 ->line($hashtag)
