@@ -107,6 +107,7 @@ class FigmaBackupCommand extends Command
         }
         else {
             $this->error($process->getErrorOutput());
+            $this->warning($project->name, $process->getErrorOutput());
         }
     }
 
