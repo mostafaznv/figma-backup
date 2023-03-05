@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Notifications\SendWarningNotification;
+use Exception;
 use App\Models\Project;
 use App\Models\ProjectBackup;
 use App\Notifications\SendBackupNotification;
@@ -22,6 +24,7 @@ class FigmaBackupCommand extends Command
     private readonly string $password;
     private readonly string $token;
     private readonly string $workingDirectory;
+    private readonly array $telegramIds;
 
     private const BACKUP_DISK = 'backups';
     private const FIGMA_DISK  = 'figma';
@@ -37,6 +40,7 @@ class FigmaBackupCommand extends Command
         $this->password = $service['password'];
         $this->token = $service['token'];
         $this->workingDirectory = $this->makeFigmaDirectory();
+        $this->telegramIds = config('settings.telegram-to');
     }
 
 
@@ -44,7 +48,18 @@ class FigmaBackupCommand extends Command
     {
         Project::query()->chunk(100, function($projects) {
             foreach ($projects as $project) {
-                $this->backup($project);
+                $this->line("Project: $project->name");
+
+                try {
+                    $this->backup($project);
+
+                    $this->line('✔️ Done');
+                }
+                catch (Exception $e) {
+                    $this->error($e->getMessage());
+
+                    $this->warning($project->name, $e->getMessage());
+                }
             }
         });
 
@@ -134,8 +149,11 @@ class FigmaBackupCommand extends Command
 
     private function notify(ProjectBackup $backup): void
     {
-        $telegramIds = config('settings.telegram-to');
+        Notification::send($this->telegramIds, new SendBackupNotification($backup));
+    }
 
-        Notification::send($telegramIds, new SendBackupNotification($backup));
+    private function warning(string $title, string $message): void
+    {
+        Notification::send($this->telegramIds, new SendWarningNotification($title, $message));
     }
 }
