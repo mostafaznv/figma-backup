@@ -16,3 +16,20 @@ if (!function_exists('byteToMb')) {
         return $bytes;
     }
 }
+
+if (!function_exists('byteToKb')) {
+    /**
+     * Convert Bytes to Kilobytes
+     *
+     * @param int $bytes
+     * @return int
+     */
+    function byteToKb(int $bytes): int
+    {
+        if ($bytes) {
+            return round($bytes / config('settings.bytes-in-kb'), 2);
+        }
+
+        return $bytes;
+    }
+}
