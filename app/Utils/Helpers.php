@@ -33,3 +33,16 @@ if (!function_exists('byteToKb')) {
         return $bytes;
     }
 }
+
+if (!function_exists('pascalCase')) {
+    /**
+     * Convert strings to pascal case
+     *
+     * @param string $str
+     * @return string
+     */
+    function pascalCase(string $str): string
+    {
+        return \Illuminate\Support\Str::of($str)->camel()->ucfirst();
+    }
+}

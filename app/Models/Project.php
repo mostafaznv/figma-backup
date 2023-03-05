@@ -24,7 +24,7 @@ class Project extends Model
     protected function hashtag(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attrs) => '#' . Str::replace('-', '_', $attrs['slug'])
+            get: fn (mixed $value, array $attrs) => '#' . pascalCase($attrs['slug'])
         );
     }
 
