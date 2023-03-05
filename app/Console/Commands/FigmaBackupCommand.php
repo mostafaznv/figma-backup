@@ -2,13 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\DTOs\FigFile;
 use App\Models\Project;
 use App\Models\ProjectBackup;
 use App\Notifications\SendBackupNotification;
 use Illuminate\Console\Command;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
