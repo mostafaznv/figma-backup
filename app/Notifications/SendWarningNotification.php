@@ -31,6 +31,7 @@ class SendWarningNotification extends Notification implements ShouldQueue
             ->content("*Warning* [$this->title]")
             ->line($this->message)
             ->line('')
-            ->line("*Datetime:* $datetime");
+            ->line("*Datetime:* $datetime")
+            ->line($this->backup->project->slug);
     }
 }

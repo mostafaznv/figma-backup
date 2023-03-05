@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Traits\Active;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Project extends Model
 {
@@ -17,6 +20,13 @@ class Project extends Model
     protected $casts = [
         'is_active' => 'boolean'
     ];
+
+    protected function hashtag(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attrs) => '#' . Str::replace('-', '_', $attrs['slug'])
+        );
+    }
 
     public function backups(): HasMany
     {

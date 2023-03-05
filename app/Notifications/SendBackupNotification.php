@@ -26,6 +26,7 @@ class SendBackupNotification extends Notification implements ShouldQueue
         $projectName = $this->backup->project->name;
         $size = byteToMb($this->backup->size);
         $datetime = $this->backup->created_at->format('Y-m-d H:i:s');
+        $hashtag = $this->backup->project->hashtag;
 
         if ($this->backup->is_large) {
             return TelegramMessage::create()
@@ -35,6 +36,7 @@ class SendBackupNotification extends Notification implements ShouldQueue
                 ->line("*Datetime:* $datetime")
                 ->line('')
                 ->line("[Download]({$this->backup->link})")
+                ->line($hashtag)
                 ->disableNotification();
         }
         else {
@@ -42,6 +44,7 @@ class SendBackupNotification extends Notification implements ShouldQueue
             *$projectName*
             *Size:* {$size}MB
             *Datetime:* $datetime
+            $hashtag
             MARKDOWN;
 
 
