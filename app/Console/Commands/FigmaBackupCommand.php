@@ -48,7 +48,7 @@ class FigmaBackupCommand extends Command
     {
         Project::query()->chunk(100, function($projects) {
             foreach ($projects as $project) {
-                $this->line("Project: $project->name");
+                $this->line($project->name);
 
                 try {
                     $this->backup($project);
