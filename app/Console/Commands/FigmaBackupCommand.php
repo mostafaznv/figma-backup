@@ -53,7 +53,7 @@ class FigmaBackupCommand extends Command
                 try {
                     $this->backup($project);
 
-                    $this->line('✔️ Done');
+                    $this->info('✔️ Done');
                 }
                 catch (Exception $e) {
                     $this->error($e->getMessage());
