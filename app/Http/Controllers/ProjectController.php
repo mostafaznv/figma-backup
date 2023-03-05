@@ -26,6 +26,8 @@ class ProjectController extends Controller
 
     public function view(Project $project): View
     {
+        $project->load('backups');
+
         return view('project.view', [
             'project' => $project,
         ]);
