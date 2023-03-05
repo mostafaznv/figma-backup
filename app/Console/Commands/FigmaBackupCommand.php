@@ -24,7 +24,7 @@ class FigmaBackupCommand extends Command
     private readonly string $password;
     private readonly string $token;
     private readonly string $workingDirectory;
-    private readonly array $telegramIds;
+    private readonly array  $telegramIds;
 
     private const BACKUP_DISK = 'backups';
     private const FIGMA_DISK  = 'figma';
@@ -69,18 +69,7 @@ class FigmaBackupCommand extends Command
 
     private function backup(Project $project): void
     {
-        $process = new Process([
-            'figma-backup',
-            '-e', $this->email,
-            '-p', $this->password,
-            '-t', $this->token,
-            '--projects-ids', $project->figma_id
-        ]);
-
-        $process->setWorkingDirectory($this->workingDirectory);
-        $process->setTimeout(self::TIMEOUT);
-        $process->setIdleTimeout(self::TIMEOUT);
-        $process->run();
+        $process = $this->runCommand($project->figma_id);
 
         if ($process->isSuccessful()) {
             $files = $this->getFigFiles();
@@ -93,6 +82,9 @@ class FigmaBackupCommand extends Command
                 $stored = $this->storeFigFile($path, $file);
 
                 if ($stored) {
+                    /**
+                     * @var ProjectBackup $backup
+                     */
                     $backup = $project->backups()->create([
                         'name' => $name,
                         'path' => $path,
@@ -109,6 +101,24 @@ class FigmaBackupCommand extends Command
             $this->error($process->getErrorOutput());
             $this->warning($project->name, $process->getErrorOutput());
         }
+    }
+
+    private function runCommand(int|string $projectId): Process
+    {
+        $process = new Process([
+            'figma-backup',
+            '-e', $this->email,
+            '-p', $this->password,
+            '-t', $this->token,
+            '--projects-ids', $projectId
+        ]);
+
+        $process->setWorkingDirectory($this->workingDirectory);
+        $process->setTimeout(self::TIMEOUT);
+        $process->setIdleTimeout(self::TIMEOUT);
+        $process->run();
+
+        return $process;
     }
 
     private function makeFigmaDirectory(): string
