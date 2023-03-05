@@ -111,7 +111,7 @@ class FigmaBackupCommand extends Command
 
     private function deleteOldFigFile(string $path): void
     {
-        Storage::disk(self::BACKUP_DISK)->delete($path);
+        Storage::disk(self::FIGMA_DISK)->delete($path);
     }
 
     /**
