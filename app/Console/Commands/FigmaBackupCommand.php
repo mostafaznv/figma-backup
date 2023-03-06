@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Actions\BackupAction;
 use App\Actions\SendTelegramMessageAction;
-use Exception;
 use App\Models\Project;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
