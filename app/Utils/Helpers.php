@@ -49,6 +49,21 @@ if (!function_exists('pascalCase')) {
     }
 }
 
+if (!function_exists('titleCase')) {
+    /**
+     * Convert strings to title case
+     *
+     * @param string $str
+     * @return string
+     */
+    function titleCase(string $str): string
+    {
+        $str = str_replace(['–', '-', '_', '(', ')', '/'], ' ', $str);
+
+        return \Illuminate\Support\Str::of($str)->title();
+    }
+}
+
 if (!function_exists('enumToNames')) {
     /**
      * Returns an array of enum names
