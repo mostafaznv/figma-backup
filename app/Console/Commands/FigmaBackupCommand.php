@@ -79,7 +79,7 @@ class FigmaBackupCommand extends Command
 
             foreach ($files as $file) {
                 $fileName = pathinfo($file->getFilename(), PATHINFO_FILENAME);
-                $pathName = pascalCase($fileName) . ' ' . now()->toDateTimeString() . '.' . $file->getExtension();
+                $pathName = $this->prepareFileName($project->name, $fileName, $file->getExtension());
                 $path = "$project->slug/$pathName";
 
                 $stored = $this->storeFigFile($path, $file);
@@ -89,7 +89,7 @@ class FigmaBackupCommand extends Command
                      * @var ProjectBackup $backup
                      */
                     $backup = $project->backups()->create([
-                        'name' => $fileName,
+                        'name' => Str::title($fileName),
                         'path' => $path,
                         'size' => $file->getSize()
                     ]);
@@ -129,6 +129,12 @@ class FigmaBackupCommand extends Command
         Storage::disk(self::FIGMA_DISK)->makeDirectory('');
 
         return Storage::disk(self::FIGMA_DISK)->path('');
+    }
+
+    private function prepareFileName(string $projectName, string $fileName, string $extension): string
+    {
+        return pascalCase($projectName) . '-' . pascalCase($fileName) . '[' . now()->unix() . '].' . $extension;
+
     }
 
     private function storeFigFile(string $path, UploadedFile $file): bool
