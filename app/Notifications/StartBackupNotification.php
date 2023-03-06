@@ -39,9 +39,7 @@ class StartBackupNotification extends Notification implements ShouldQueue
             ->line('')
             ->line("*Total Projects:* $total")
             ->line("*Active Projects:* $active")
-            ->line('')
             ->line("------------")
-            ->line('')
             ->line($projects);
     }
 }
