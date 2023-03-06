@@ -41,6 +41,8 @@ class StartBackupNotification extends Notification implements ShouldQueue
             ->line("*Active Projects:* $active")
             ->line("------------")
             ->line($projects)
+            ->line('')
+            ->line('#DailyBackup')
             ->disableNotification();
     }
 }
