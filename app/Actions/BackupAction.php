@@ -106,7 +106,7 @@ final class BackupAction
         $pathName = $this->figmaStorage->prepareFileName($project->name, $fileName, $file->getExtension());
 
         $path = new stdClass();
-        $path->name = $fileName;
+        $path->name = pascalCase($fileName);
         $path->path = "$project->slug/$pathName";
 
         return $path;
