@@ -9,7 +9,7 @@ class ProjectBackupObserver
 {
     public function creating(ProjectBackup $backup): void
     {
-        $extension = pathinfo($backup->name, PATHINFO_EXTENSION);
+        $extension = pathinfo($backup->path, PATHINFO_EXTENSION);
 
         $backup->type = match ($extension) {
             'fig'   => FileType::FIG,
