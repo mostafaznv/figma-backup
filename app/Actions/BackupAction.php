@@ -71,11 +71,13 @@ final class BackupAction
 
     private function cmd(int|string $projectId): Process
     {
+        $service = config('services.figma');
+
         $cmd = [
             'figma-backup',
-            '-e', $this->email,
-            '-p', $this->password,
-            '-t', $this->token,
+            '-e', $service['email'],
+            '-p', $service['password'],
+            '-t', $service['token'],
             '--projects-ids', $projectId
         ];
 
