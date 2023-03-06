@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Notifications\SendWarningNotification;
+use App\Notifications\WarningNotification;
 use App\Notifications\StartBackupNotification;
 use Exception;
 use App\Models\Project;
 use App\Models\ProjectBackup;
-use App\Notifications\SendBackupNotification;
+use App\Notifications\BackupNotification;
 use Illuminate\Console\Command;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Notification;
@@ -173,11 +173,11 @@ class FigmaBackupCommand extends Command
 
     private function notify(ProjectBackup $backup): void
     {
-        Notification::send($this->telegramIds, new SendBackupNotification($backup));
+        Notification::send($this->telegramIds, new BackupNotification($backup));
     }
 
     private function warning(string $title, string $message, ?string $hashtag = null): void
     {
-        Notification::send($this->telegramIds, new SendWarningNotification($title, $message, $hashtag));
+        Notification::send($this->telegramIds, new WarningNotification($title, $message, $hashtag));
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\Telegram\TelegramFile;
 use NotificationChannels\Telegram\TelegramMessage;
 
-class SendBackupNotification extends Notification implements ShouldQueue
+class BackupNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
