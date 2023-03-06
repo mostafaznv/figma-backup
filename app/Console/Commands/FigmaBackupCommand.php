@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Notifications\SendWarningNotification;
+use App\Notifications\StartBackupNotification;
 use Exception;
 use App\Models\Project;
 use App\Models\ProjectBackup;
@@ -46,6 +47,8 @@ class FigmaBackupCommand extends Command
 
     public function handle(): int
     {
+        $this->sendInfo();
+
         Project::query()->chunk(100, function($projects) {
             foreach ($projects as $project) {
                 $this->line($project->name);
@@ -161,6 +164,11 @@ class FigmaBackupCommand extends Command
         }
 
         return $figFiles;
+    }
+
+    private function sendInfo(): void
+    {
+        Notification::send($this->telegramIds, new StartBackupNotification());
     }
 
     private function notify(ProjectBackup $backup): void
