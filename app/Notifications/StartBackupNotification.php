@@ -22,8 +22,8 @@ class StartBackupNotification extends Notification implements ShouldQueue
     public function toTelegram($notifiable)
     {
         $datetime = now()->toFormattedDayDateString();
-        $total = Project::query()->count();
-        $active = Project::query()->withoutGlobalScope(ActiveScope::class)->count();
+        $active = Project::query()->count();
+        $total = Project::query()->withoutGlobalScope(ActiveScope::class)->count();
         $projects = Project::query()
             ->select('slug')
             ->get()
