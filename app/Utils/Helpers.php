@@ -43,7 +43,7 @@ if (!function_exists('pascalCase')) {
      */
     function pascalCase(string $str): string
     {
-        $str = str_replace(['-', '_', '(', ')'], ' ', $str);
+        $str = str_replace(['–', '-', '_', '(', ')', '/'], ' ', $str);
 
         return \Illuminate\Support\Str::of($str)->camel()->ucfirst();
     }
