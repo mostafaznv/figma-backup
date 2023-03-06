@@ -14,7 +14,7 @@ class Project extends Model
     use Active;
 
     protected $fillable = [
-        'figma_id', 'name', 'slug', 'is_active'
+        'figma_id', 'name', 'slug', 'is_active', 'latest_backup_at'
     ];
 
     protected $casts = [

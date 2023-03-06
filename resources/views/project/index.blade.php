@@ -44,7 +44,7 @@
 
                                     <td class="py-4 px-6">{{ $project->is_active ? '✔️' : '✖️' }}</td>
 
-                                    <td class="py-4 px-6 whitespace-nowrap">{{ strtoupper($project->latest_backup_at?->format('Y-m-d H:i:s') ?? '—') }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap">{{ strtoupper($project->latest_backup_at ?? '—') }}</td>
                                     <td class="py-4 px-6 whitespace-nowrap">{{ strtoupper($project->created_at->format('Y-m-d')) }}</td>
 
                                     <td class="py-4 px-6 text-right">
