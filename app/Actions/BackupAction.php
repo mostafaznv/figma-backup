@@ -62,9 +62,11 @@ final class BackupAction
             $this->figmaStorage->cleanup();
         }
 
-        $this->telegram->warning(
-            $project->name, $errorMessage, $project->hashtag
-        );
+        if ($errorMessage) {
+            $this->telegram->warning(
+                $project->name, $errorMessage, $project->hashtag
+            );
+        }
 
         return BackupResultData::make($errorMessage);
     }
