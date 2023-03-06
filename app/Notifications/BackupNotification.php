@@ -27,6 +27,7 @@ class BackupNotification extends Notification implements ShouldQueue
         $type = $this->backup->type->name;
         $size = byteToMb($this->backup->size);
         $datetime = $this->backup->created_at->format('Y-m-d H:i:s');
+        $link = $this->backup->link;
         $hashtag = $this->backup->project->hashtag;
 
         if ($this->backup->is_large) {
@@ -39,7 +40,7 @@ class BackupNotification extends Notification implements ShouldQueue
                 ->line("*Size:* {$size}MB")
                 ->line("*Datetime:* $datetime")
                 ->line('')
-                ->line("[Download]({$this->backup->link})")
+                ->line("[Download]($link)")
                 ->line($hashtag)
                 ->disableNotification();
         }
@@ -51,6 +52,7 @@ class BackupNotification extends Notification implements ShouldQueue
             *Size:* {$size}MB
             *Datetime:* $datetime
 
+            [Download]($link)
             $hashtag
             MARKDOWN;
 

@@ -13,6 +13,8 @@ Route::get('/', function() {
 });
 
 
+Route::get('download', [ProjectController::class, 'download'])->name('download');
+
 Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -53,6 +55,9 @@ Route::middleware(['auth'])->group(function() {
             # delete project
             Route::delete('/', [ProjectController::class, 'destroy'])->name('destroy');
 
+            Route::prefix('backup_hashid')->group(function() {
+                Route::get('download', [ProjectController::class, 'download'])->name('download');
+            });
         });
     });
 });

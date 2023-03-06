@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Actions\GenerateDownloadLinkAction;
 use App\Enums\FileType;
+use App\Models\QueryBuilders\ProjectBackupQueryBuilder;
 use App\Observers\ProjectBackupObserver;
+use App\Traits\HasHashId;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectBackup extends Model
 {
+    use HasHashId;
+
     protected $fillable = [
         'project_id', 'name', 'path', 'size'
     ];
@@ -24,11 +29,17 @@ class ProjectBackup extends Model
         ProjectBackup::observe(ProjectBackupObserver::class);
     }
 
-    protected function link(): Attribute
+    public function newEloquentBuilder($query): ProjectBackupQueryBuilder
     {
-        return Attribute::make(
-            get: fn(mixed $value, array $attributes) => Storage::disk('backups')->url($attributes['path'])
-        );
+        return new ProjectBackupQueryBuilder($query);
+    }
+
+
+    public function link(bool $signed = false): string
+    {
+        $action = new GenerateDownloadLinkAction($this);
+
+        return $action($signed);
     }
 
     protected function fullPath(): Attribute
