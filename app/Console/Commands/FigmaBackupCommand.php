@@ -133,7 +133,7 @@ class FigmaBackupCommand extends Command
 
     private function prepareFileName(string $projectName, string $fileName, string $extension): string
     {
-        return pascalCase($projectName) . '-' . pascalCase($fileName) . '[' . now()->unix() . '].' . $extension;
+        return pascalCase($projectName) . '-' . pascalCase($fileName) . '-' . now()->unix() . '.' . $extension;
 
     }
 
