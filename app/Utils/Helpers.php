@@ -34,6 +34,23 @@ if (!function_exists('byteToKb')) {
     }
 }
 
+if (!function_exists('normalizeText')) {
+    /**
+     * Normalize Text
+     * remove unexpected characters from strings
+     *
+     * @param string $str
+     * @return string
+     */
+    function normalizeText(string $str): string
+    {
+        $str = trim($str);
+        $str = str_replace(['–', '-', '_', '(', ')', '/'], ' ', $str);
+
+        return preg_replace('!\s+!', ' ', $str);
+    }
+}
+
 if (!function_exists('pascalCase')) {
     /**
      * Convert strings to pascal case
@@ -43,7 +60,7 @@ if (!function_exists('pascalCase')) {
      */
     function pascalCase(string $str): string
     {
-        $str = str_replace(['–', '-', '_', '(', ')', '/'], ' ', $str);
+        $str = normalizeText($str);
 
         return \Illuminate\Support\Str::of($str)->camel()->ucfirst();
     }
@@ -58,7 +75,7 @@ if (!function_exists('titleCase')) {
      */
     function titleCase(string $str): string
     {
-        $str = str_replace(['–', '-', '_', '(', ')', '/'], ' ', $str);
+        $str = normalizeText($str);
 
         return \Illuminate\Support\Str::of($str)->title();
     }
