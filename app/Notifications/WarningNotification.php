@@ -30,6 +30,7 @@ class WarningNotification extends Notification implements ShouldQueue
         return TelegramMessage::create()
             ->to($notifiable)
             ->content("*Warning* [$this->title]")
+            ->line('')
             ->line($this->message)
             ->line('')
             ->line("*Datetime:* $datetime")
