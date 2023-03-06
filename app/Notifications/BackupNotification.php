@@ -27,7 +27,7 @@ class BackupNotification extends Notification implements ShouldQueue
         $type = $this->backup->type->name;
         $size = byteToMb($this->backup->size);
         $datetime = $this->backup->created_at->format('Y-m-d H:i:s');
-        $link = $this->backup->link;
+        $link = $this->backup->link();
         $hashtag = $this->backup->project->hashtag;
 
         if ($this->backup->is_large) {
