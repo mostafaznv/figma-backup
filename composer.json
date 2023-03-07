@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1.0",
+        "anhskohbo/no-captcha": "^3.5",
         "guzzlehttp/guzzle": "^7.2",
         "hashids/hashids": "^5.0",
         "laravel-notification-channels/telegram": "^4.0",
