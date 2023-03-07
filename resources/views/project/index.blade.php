@@ -24,7 +24,6 @@
                                 <th scope="col" class="pb-3 px-6 text-base">{{ __('Slug') }}</th>
                                 <th scope="col" class="pb-3 px-6 text-base">{{ __('Status') }}</th>
                                 <th scope="col" class="pb-3 px-6 text-base">{{ __('Backup At') }}</th>
-                                <th scope="col" class="pb-3 px-6 text-base">{{ __('Created At') }}</th>
                                 <th scope="col" class="pb-3 px-6 text-base"></th>
                             </tr>
                             </thead>
@@ -45,7 +44,6 @@
                                     <td class="py-4 px-6">{{ $project->is_active ? '✔️' : '✖️' }}</td>
 
                                     <td class="py-4 px-6 whitespace-nowrap">{{ strtoupper($project->latest_backup_at ? $project->latest_backup_at->toDateString() : '—') }}</td>
-                                    <td class="py-4 px-6 whitespace-nowrap">{{ strtoupper($project->created_at->toDateString()) }}</td>
 
                                     <td class="py-4 px-6 text-right">
                                         <a href="{{ route('projects.view', ['any_project' => $project->id]) }}" class="inline-flex items-center justify-center mt-1 mb-1 px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" style="min-width: 72px">{{ __('View') }}</a>
