@@ -22,11 +22,14 @@ final class GenerateDownloadResponseAction
 
         if ($backupId == $hashIds[0]) {
             $backup = $this->backup($backupId);
-            $path = Storage::disk('backups')->path($backup->path);
 
-            ($this->incrementTotalDownloads)($backup);
+            if ($backup->path) {
+                $path = Storage::disk('backups')->path($backup->path);
 
-            PhpXsendfile::download($path);
+                ($this->incrementTotalDownloads)($backup);
+
+                PhpXsendfile::download($path);
+            }
         }
     }
 
