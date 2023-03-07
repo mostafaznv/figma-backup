@@ -35,13 +35,6 @@ class ProjectBackup extends Model
     }
 
 
-    public function link(bool $signed = false): string
-    {
-        $action = new GenerateDownloadLinkAction($this);
-
-        return $action($signed);
-    }
-
     protected function fullPath(): Attribute
     {
         return Attribute::make(
@@ -57,6 +50,13 @@ class ProjectBackup extends Model
         return Attribute::make(
             get: fn(mixed $value, array $attributes) => $attributes['size'] > $limitation
         );
+    }
+
+    public function link(bool $signed = false): string
+    {
+        $action = new GenerateDownloadLinkAction($this);
+
+        return $action($signed);
     }
 
     public function project(): BelongsTo
