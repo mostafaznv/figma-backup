@@ -12,6 +12,10 @@ final class GenerateDownloadResponseAction
 {
     use HashId;
 
+    public function __construct(
+        private readonly IncrementBackupTotalDownloadsAction $incrementTotalDownloads
+    ) {}
+
     public function __invoke(int $backupId, string $hashId): mixed
     {
         $hashIds = $this->hashids()->decode($hashId);
@@ -19,6 +23,8 @@ final class GenerateDownloadResponseAction
         if ($backupId == $hashIds[0]) {
             $backup = $this->backup($backupId);
             $path = Storage::disk('backups')->path($backup->path);
+
+            ($this->incrementTotalDownloads)($backup);
 
             PhpXsendfile::download($path);
         }
