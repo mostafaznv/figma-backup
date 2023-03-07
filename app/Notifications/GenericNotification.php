@@ -28,8 +28,9 @@ class GenericNotification extends Notification implements ShouldQueue
 
         return TelegramMessage::create()
             ->to($notifiable)
-            ->line("*$this->title*")
-            ->content("$this->content")
+            ->content("*$this->title*")
+            ->line('')
+            ->line("$this->content")
             ->line('')
             ->line("$datetime")
             ->disableNotification();
