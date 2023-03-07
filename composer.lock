@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e706bdfe9e27ad5f5836b8760e56591",
+    "content-hash": "6dbfd7cae41e90cef47d68c68fcbc3ff",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -2015,6 +2015,76 @@
                 }
             ],
             "time": "2023-02-06T13:46:10+00:00"
+        },
+        {
+            "name": "mostafaznv/laracache",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mostafaznv/laracache.git",
+                "reference": "0d956a9fedf55a84b6f663e40e2de65ffbd432eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mostafaznv/laracache/zipball/0d956a9fedf55a84b6f663e40e2de65ffbd432eb",
+                "reference": "0d956a9fedf55a84b6f663e40e2de65ffbd432eb",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^8.40.0|^9.0|^10.0",
+                "php": "^8.0.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "pestphp/pest": "^1.20",
+                "phpunit/phpunit": "^9.5.10|^10.0",
+                "spatie/pest-plugin-test-time": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mostafaznv\\LaraCache\\LaraCacheServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Utils/Helpers.php"
+                ],
+                "psr-4": {
+                    "Mostafaznv\\LaraCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mostafaznv",
+                    "email": "mostafa.zeinivand@gmail.com"
+                }
+            ],
+            "description": "LaraCache is a customizable cache trait to cache queries on model's events",
+            "keywords": [
+                "cache",
+                "eloquent",
+                "laravel",
+                "laravel 8",
+                "laravel 9",
+                "memcache",
+                "mostafaznv",
+                "nova 4",
+                "orm",
+                "redis"
+            ],
+            "support": {
+                "docs": "https://github.com/mostafaznv/laracache/blob/master/README.md",
+                "issues": "https://github.com/mostafaznv/laracache/issues",
+                "source": "https://github.com/mostafaznv/laracache"
+            },
+            "time": "2023-02-15T18:10:45+00:00"
         },
         {
             "name": "mostafaznv/php-x-sendfile",

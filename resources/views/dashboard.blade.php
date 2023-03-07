@@ -10,6 +10,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <x-card :label="__('Total Users')" :text="$users" />
                 <x-card :label="__('Total Projects')" :text="$projects" />
+                <x-card :label="__('Total Downloads')" :text="$totalDownloads" />
             </div>
         </div>
     </div>
