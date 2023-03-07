@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Storage;
 use Mostafaznv\LaraCache\CacheEntity;
 use Mostafaznv\LaraCache\Traits\LaraCache;
 
+/**
+ * @method static ProjectBackupQueryBuilder whereExpired(?int $expiryDays = null)
+ */
 class ProjectBackup extends Model
 {
     use HasHashId, LaraCache;

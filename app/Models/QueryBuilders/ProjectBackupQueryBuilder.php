@@ -15,4 +15,17 @@ final class ProjectBackupQueryBuilder extends Builder
 
         return $this->where('id', $id);
     }
+
+    public function whereExpired(?int $expiryDays = null): self
+    {
+        if (is_null($expiryDays)) {
+            $expiryDays = config('settings.file-expiry-days');
+        }
+
+        $date = now()->subDays($expiryDays)->toDateString();
+
+        return $this->whereHas('project')
+            ->whereNotNull('path')
+            ->whereDate('created_at', '<', $date);
+    }
 }

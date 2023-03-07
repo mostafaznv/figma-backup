@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\ProjectBackup;
 use App\Notifications\BackupNotification;
+use App\Notifications\GenericNotification;
 use App\Notifications\StartBackupNotification;
 use App\Notifications\WarningNotification;
 use Illuminate\Support\Facades\Notification;
@@ -17,6 +18,11 @@ final class SendTelegramMessageAction
         $this->telegramIds = config('settings.telegram-to');
     }
 
+
+    public function generic(string $title, string $content): void
+    {
+        Notification::send($this->telegramIds, new GenericNotification($title, $content));
+    }
 
     public function info(): void
     {
