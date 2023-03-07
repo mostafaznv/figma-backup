@@ -67,7 +67,11 @@
                                         <td class="py-4 px-6">{{ $backup->total_downloads }}</td>
                                         <td class="py-4 px-6">{{ $backup->created_at->format('Y-m-d H:i:s') }}</td>
                                         <td class="py-4 px-6 text-right">
-                                            <a href="{{ $backup->link(true) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" download>{{ __('Download') }}</a>
+                                            @if($link = $backup->link(true))
+                                                <a href="{{ $link }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" download>{{ __('Download') }}</a>
+                                            @else
+                                                <a href="javascript:;" class="inline-flex items-center px-4 py-2 bg-gray-300 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150">{{ __('Download') }}</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

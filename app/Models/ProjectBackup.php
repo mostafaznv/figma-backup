@@ -68,7 +68,7 @@ class ProjectBackup extends Model
         );
     }
 
-    public function link(bool $signed = false): string
+    public function link(bool $signed = false): ?string
     {
         $action = new GenerateDownloadLinkAction($this);
 
