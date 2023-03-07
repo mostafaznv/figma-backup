@@ -46,6 +46,16 @@ class ProjectBackup extends Model
             CacheEntity::make(Cache::TOTAL_DOWNLOADS)
                 ->cache(function() {
                     return ProjectBackup::query()->sum('total_downloads');
+                }),
+
+            CacheEntity::make(Cache::TOTAL_BACKUPS)
+                ->cache(function() {
+                    return ProjectBackup::query()->count();
+                }),
+
+            CacheEntity::make(Cache::TOTAL_AVAILABLE_BACKUPS)
+                ->cache(function() {
+                    return ProjectBackup::query()->whereNotNull('path')->count();
                 })
         ];
     }
