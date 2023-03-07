@@ -18,13 +18,14 @@ class Project extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean'
+        'is_active'        => 'boolean',
+        'latest_backup_at' => 'date'
     ];
 
     protected function hashtag(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attrs) => '#' . pascalCase($attrs['slug'])
+            get: fn(mixed $value, array $attrs) => '#' . pascalCase($attrs['slug'])
         );
     }
 
