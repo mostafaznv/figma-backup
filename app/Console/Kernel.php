@@ -12,13 +12,19 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('cache:prune-stale-tags')->hourly();
-        $schedule->command(FigmaBackupCommand::class)->daily();
-        $schedule->command(DeleteOldFilesCommand::class)->dailyAt('9:00');
+
+        $schedule->command(FigmaBackupCommand::class)
+            ->daily()
+            ->sendOutputTo(storage_path('logs/figma-backup.log'));
+
+        $schedule->command(DeleteOldFilesCommand::class)
+            ->dailyAt('9:00')
+            ->sendOutputTo(storage_path('logs/delete-old-files.log'));
     }
 
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
