@@ -65,14 +65,17 @@ final class SendTelegramMessageAction
         return $this;
     }
 
-    public function send(): array
+    public function send(int $delay = null): array
     {
+        $delay = is_null($delay) ? self::DELAY : $delay;
         $errors = [];
 
-        foreach ($this->bag as $notification) {
-            sleep(self::DELAY);
-
+        foreach ($this->bag as $index => $notification) {
             try {
+                if ($index) {
+                    sleep($delay);
+                }
+
                 Notification::send($this->telegramIds, $notification);
             }
             catch (Exception $e) {
