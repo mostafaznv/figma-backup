@@ -51,7 +51,11 @@ final class BackupAction
                     }
                 }
 
-                $this->telegram->send();
+                $result = $this->telegram->send();
+
+                if (count($result)) {
+                    $errorMessage = implode(PHP_EOL, $result);
+                }
             }
             else {
                 $errorMessage = $process->getErrorOutput();
