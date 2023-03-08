@@ -45,10 +45,9 @@ class DeleteOldFilesCommand extends Command
         });
 
         if ($this->total) {
-            $this->telegram->generic(
-                title: 'Old files deleted',
-                content: "$this->total old backup files deleted"
-            );
+            $this->telegram
+                ->generic(title: 'Old files deleted', content: "$this->total old backup files deleted")
+                ->send();
         }
 
         return SymfonyCommand::SUCCESS;

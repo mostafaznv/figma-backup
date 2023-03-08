@@ -23,7 +23,7 @@ class FigmaBackupCommand extends Command
 
     public function handle(): int
     {
-        $this->telegram->info();
+        $this->telegram->info()->send();
 
         Project::query()->chunk(100, function($projects) {
             foreach ($projects as $project) {

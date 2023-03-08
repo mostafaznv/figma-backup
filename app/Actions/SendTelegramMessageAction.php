@@ -2,16 +2,26 @@
 
 namespace App\Actions;
 
+use Exception;
 use App\Models\ProjectBackup;
 use App\Notifications\BackupNotification;
 use App\Notifications\GenericNotification;
 use App\Notifications\StartBackupNotification;
 use App\Notifications\WarningNotification;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\Notification as LaravelNotification;
 
 final class SendTelegramMessageAction
 {
     private readonly array $telegramIds;
+
+    /**
+     * @var LaravelNotification[]
+     */
+    private array $bag = [];
+
+    private const DELAY = 4;
+
 
     public function __construct()
     {
@@ -19,23 +29,64 @@ final class SendTelegramMessageAction
     }
 
 
-    public function generic(string $title, string $content): void
+    public function generic(string $title, string $content): self
     {
-        Notification::send($this->telegramIds, new GenericNotification($title, $content));
+        $this->queue(
+            new GenericNotification($title, $content)
+        );
+
+        return $this;
     }
 
-    public function info(): void
+    public function info(): self
     {
-        Notification::send($this->telegramIds, new StartBackupNotification());
+        $this->queue(
+            new StartBackupNotification()
+        );
+
+        return $this;
     }
 
-    public function notify(ProjectBackup $backup): void
+    public function notify(ProjectBackup $backup): self
     {
-        Notification::send($this->telegramIds, new BackupNotification($backup));
+        $this->queue(
+            new BackupNotification($backup)
+        );
+
+        return $this;
     }
 
-    public function warning(string $title, string $message, ?string $hashtag = null): void
+    public function warning(string $title, string $message, ?string $hashtag = null): self
     {
-        Notification::send($this->telegramIds, new WarningNotification($title, $message, $hashtag));
+        $this->queue(
+            new WarningNotification($title, $message, $hashtag)
+        );
+
+        return $this;
+    }
+
+    public function send(): array
+    {
+        $errors = [];
+
+        foreach ($this->bag as $notification) {
+            sleep(self::DELAY);
+
+            try {
+                Notification::send($this->telegramIds, $notification);
+            }
+            catch (Exception $e) {
+                $errors[] = $e->getMessage();
+            }
+        }
+
+        $this->bag = [];
+
+        return $errors;
+    }
+
+    private function queue(LaravelNotification $notification): void
+    {
+        $this->bag[] = $notification;
     }
 }

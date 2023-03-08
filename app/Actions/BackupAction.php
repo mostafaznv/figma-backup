@@ -50,6 +50,8 @@ final class BackupAction
                         $this->telegram->notify($backup);
                     }
                 }
+
+                $this->telegram->send();
             }
             else {
                 $errorMessage = $process->getErrorOutput();
@@ -63,9 +65,9 @@ final class BackupAction
         }
 
         if ($errorMessage) {
-            $this->telegram->warning(
-                $project->name, $errorMessage, $project->hashtag
-            );
+            $this->telegram
+                ->warning($project->name, $errorMessage, $project->hashtag)
+                ->send();
         }
 
         return BackupResultData::make($errorMessage);
