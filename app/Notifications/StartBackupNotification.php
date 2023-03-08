@@ -27,10 +27,11 @@ class StartBackupNotification extends Notification implements ShouldQueue
         $projects = Project::query()
             ->select('slug')
             ->get()
-            ->map(function($row) {
-                return "`$row->slug`";
+            ->map(function($row, int $key) {
+                $num = $key + 1;
+                return "$num. `$row->slug`";
             })
-            ->implode(', ');
+            ->implode(PHP_EOL);
 
         return TelegramMessage::create()
             ->to($notifiable)
