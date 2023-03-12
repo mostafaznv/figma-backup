@@ -55,6 +55,6 @@ class DeleteOldFilesCommand extends Command
 
     private function oldBackups(): ProjectBackupQueryBuilder
     {
-        return ProjectBackup::whereExpired()->with('project');
+        return ProjectBackup::whereIsOnExpireDay()->with('project');
     }
 }

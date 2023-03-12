@@ -17,6 +17,7 @@ use Mostafaznv\LaraCache\Traits\LaraCache;
 
 /**
  * @method static ProjectBackupQueryBuilder whereExpired(?int $expiryDays = null)
+ * @method static ProjectBackupQueryBuilder whereIsOnExpireDay(?int $expiryDays = null)
  */
 class ProjectBackup extends Model
 {

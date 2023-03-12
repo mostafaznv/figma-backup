@@ -28,4 +28,17 @@ final class ProjectBackupQueryBuilder extends Builder
             ->whereNotNull('path')
             ->whereDate('created_at', '<', $date);
     }
+
+    public function whereIsOnExpireDay(?int $day = null): self
+    {
+        if (is_null($day)) {
+            $day = config('settings.file-expiry-days');
+        }
+
+        $date = now()->subDays($day)->toDateString();
+
+        return $this->whereHas('project')
+            ->whereNotNull('path')
+            ->whereDate('created_at', $date);
+    }
 }
