@@ -9,6 +9,6 @@ return [
     'mail-to'     => explode(',', env('EMAIL_SEND_TO', [])),
     'telegram-to' => [
         'backups'  => explode(',', env('TELEGRAM_BACKUPS_SEND_TO', [])),
-        'warnings' => explode(',', env('TELEGRAM_WARNING_SEND_TO', [])),
+        'warnings' => explode(',', env('TELEGRAM_WARNINGS_SEND_TO', [])),
     ],
 ];
