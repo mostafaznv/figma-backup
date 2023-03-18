@@ -4,7 +4,8 @@ return [
     'bytes-in-mb' => 1048576,
     'bytes-in-kb' => 1024,
 
-    'file-expiry-days' => 10,
+    'file-expiry-days'       => 10,
+    'telegram-max-file-size' => env('TELEGRAM_MAX_FILE_SIZE', 49), // MB
 
     'mail-to'     => explode(',', env('EMAIL_SEND_TO', [])),
     'telegram-to' => [

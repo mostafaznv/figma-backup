@@ -72,7 +72,7 @@ class ProjectBackup extends Model
     protected function isLarge(): Attribute
     {
         $bytesInMb = config('settings.bytes-in-mb');
-        $limitation = 49 * $bytesInMb;
+        $limitation = config('settings.telegram-max-file-size') * $bytesInMb;
 
         return Attribute::make(
             get: fn(mixed $value, array $attributes) => $attributes['size'] > $limitation
