@@ -25,7 +25,7 @@ class StartBackupNotification extends Notification implements ShouldQueue
         $active = Project::query()->count();
         $total = Project::query()->withoutGlobalScope(ActiveScope::class)->count();
         $projects = Project::query()
-            ->select('slug')
+            ->select('name')
             ->get()
             ->map(function($row, int $key) {
                 $num = $key + 1;
