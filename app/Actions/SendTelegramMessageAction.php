@@ -28,8 +28,8 @@ final class SendTelegramMessageAction
     {
         $sendToIds = config('settings.telegram-to');
 
-        $this->telegramBackupsIds = $sendToIds['backups'];
-        $this->telegramWarningIds = $sendToIds['warnings'];
+        $this->telegramBackupsIds = $sendToIds['backups'] ?? [];
+        $this->telegramWarningIds = $sendToIds['warnings'] ?? [];
     }
 
 
