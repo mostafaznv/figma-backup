@@ -7,5 +7,8 @@ return [
     'file-expiry-days' => 10,
 
     'mail-to'     => explode(',', env('EMAIL_SEND_TO', [])),
-    'telegram-to' => explode(',', env('TELEGRAM_SEND_TO', [])),
+    'telegram-to' => [
+        'backups'  => explode(',', env('TELEGRAM_BACKUPS_SEND_TO', [])),
+        'warnings' => explode(',', env('TELEGRAM_WARNING_SEND_TO', [])),
+    ],
 ];

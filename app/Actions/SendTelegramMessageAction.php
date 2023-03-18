@@ -13,7 +13,8 @@ use Illuminate\Notifications\Notification as LaravelNotification;
 
 final class SendTelegramMessageAction
 {
-    private readonly array $telegramIds;
+    private readonly array $telegramBackupsIds;
+    private readonly array $telegramWarningIds;
 
     /**
      * @var LaravelNotification[]
@@ -25,7 +26,10 @@ final class SendTelegramMessageAction
 
     public function __construct()
     {
-        $this->telegramIds = config('settings.telegram-to');
+        $sendToIds = config('settings.telegram-to');
+
+        $this->telegramBackupsIds = $sendToIds['backups'];
+        $this->telegramWarningIds = $sendToIds['warnings'];
     }
 
 
@@ -76,7 +80,12 @@ final class SendTelegramMessageAction
                     sleep($delay);
                 }
 
-                Notification::send($this->telegramIds, $notification);
+                $isInstanceOfWarning = $notification instanceof WarningNotification;
+
+                Notification::send(
+                    notifiables: $isInstanceOfWarning ? $this->telegramWarningIds : $this->telegramBackupsIds,
+                    notification: $notification
+                );
             }
             catch (Exception $e) {
                 $errors[] = $e->getMessage();
