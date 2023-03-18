@@ -29,7 +29,7 @@ class StartBackupNotification extends Notification implements ShouldQueue
             ->get()
             ->map(function($row, int $key) {
                 $num = $key + 1;
-                return "$num. `$row->slug`";
+                return "$num. $row->name";
             })
             ->implode(PHP_EOL);
 
