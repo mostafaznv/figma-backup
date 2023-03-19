@@ -118,7 +118,6 @@ RUN COMPOSER_MEMORY_LIMIT=-1 composer install --optimize-autoloader --no-interac
 
 # run artisan commands
 RUN php artisan optimize
-RUN php artisan migrate --force -n
 RUN php artisan storage:link
 
 
