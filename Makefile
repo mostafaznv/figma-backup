@@ -12,8 +12,8 @@ ifndef INSIDE_DOCKER_CONTAINER
 	INSIDE_DOCKER_CONTAINER = 0
 endif
 
-HOST_UID := $(shell id -u)
-HOST_GID := $(shell id -g)
+HOST_UID := $(shell id -u www-data)
+HOST_GID := $(shell id -g www-data)
 PHP_USER := -u www-data
 PROJECT_NAME := -p ${COMPOSE_PROJECT_NAME}
 OPTION_T := -T
@@ -27,7 +27,7 @@ MAKEFLAGS += --no-print-directory
 ## build environment
 build:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	docker-compose -f docker-compose.yml build
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose -f docker-compose.yml build
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -37,7 +37,7 @@ endif
 ## start environment
 start:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	docker-compose -f docker-compose.yml $(PROJECT_NAME) up -d
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose -f docker-compose.yml $(PROJECT_NAME) up -d
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -47,7 +47,7 @@ endif
 ## stop environment
 stop:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	docker-compose -f docker-compose.yml $(PROJECT_NAME) down
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose -f docker-compose.yml $(PROJECT_NAME) down
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -68,7 +68,7 @@ env:
 ## get bash inside backend docker container
 ssh:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	docker-compose $(PROJECT_NAME) exec $(OPTION_T) $(PHP_USER) backend bash
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose $(PROJECT_NAME) exec $(OPTION_T) $(PHP_USER) backend bash
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -78,7 +78,7 @@ endif
 ## get bash inside nginx docker container
 ssh-nginx:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	docker-compose $(PROJECT_NAME) exec nginx /bin/sh
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose $(PROJECT_NAME) exec nginx /bin/sh
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -89,7 +89,7 @@ endif
 ## get bash inside supervisord docker container (cron jobs running there, etc...)
 ssh-supervisord:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	docker-compose $(PROJECT_NAME) exec supervisord bash
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose $(PROJECT_NAME) exec supervisord bash
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -99,7 +99,7 @@ endif
 ## get bash inside mysql docker container
 ssh-mysql:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	docker-compose $(PROJECT_NAME) exec mysql bash
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose $(PROJECT_NAME) exec mysql bash
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -111,7 +111,7 @@ exec:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 1)
 	@$$cmd
 else
-	docker-compose $(PROJECT_NAME) exec $(OPTION_T) $(PHP_USER) backend $$cmd
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose $(PROJECT_NAME) exec $(OPTION_T) $(PHP_USER) backend $$cmd
 endif
 
 
@@ -121,7 +121,7 @@ exec-bash:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 1)
 	@bash -c "$(cmd)"
 else
-	docker-compose $(PROJECT_NAME) exec $(OPTION_T) $(PHP_USER) backend bash -c "$(cmd)"
+	@HOST_UID=$(HOST_UID) HOST_GID=$(HOST_GID) WEB_PORT_HTTP=$(WEB_PORT_HTTP) INNODB_USE_NATIVE_AIO=$(INNODB_USE_NATIVE_AIO) docker-compose $(PROJECT_NAME) exec $(OPTION_T) $(PHP_USER) backend bash -c "$(cmd)"
 endif
 
 
