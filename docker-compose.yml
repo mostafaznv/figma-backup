@@ -50,7 +50,7 @@ services:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
         ports:
-            - "127.0.0.1:3306:3306"
+            - "127.0.0.1:33061:3306"
         volumes:
             - ./storage/mysql-data:/var/lib/mysql:delegated
         networks:
