@@ -1,7 +1,9 @@
 export COMPOSE_PROJECT_NAME=figma-backup
 export WEB_PORT_HTTP=80
+export INNODB_USE_NATIVE_AIO=1
 
 
+MAKEFLAGS += --no-print-directory
 
 # determine if .env file exist
 ifneq ("$(wildcard .env)","")
@@ -16,11 +18,13 @@ HOST_UID := $(shell id -u www-data)
 HOST_GID := $(shell id -g www-data)
 PHP_USER := -u www-data
 PROJECT_NAME := -p ${COMPOSE_PROJECT_NAME}
-OPTION_T := -T
+INTERACTIVE := $(shell [ -t 0 ] && echo 1)
 ERROR_ONLY_FOR_HOST = @printf "\033[33mThis command for host machine\033[39m\n"
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := info
 
-MAKEFLAGS += --no-print-directory
+ifneq ($(INTERACTIVE), 1)
+	OPTION_T := -T
+endif
 
 
 
