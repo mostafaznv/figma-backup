@@ -127,6 +127,25 @@ endif
 
 
 
+# download figma backup files
+figma-backup:
+	@make exec cmd="php artisan figma:backup"
+
+
+
+# delete old backup files
+figma-delete-old-files:
+	@make exec cmd="php artisan figma:delete-old-files"
+
+
+
+# make admin
+make-admin:
+	@make exec cmd="php artisan make:admin"
+
+
+
+
 # wait for database
 wait-for-db:
 	@make exec cmd="php artisan db:wait"
