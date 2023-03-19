@@ -191,7 +191,7 @@ info:
 ## shows logs from the backend container. Use ctrl+c in order to exit
 logs:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	@docker logs -f backend
+	@docker logs -f ${COMPOSE_PROJECT_NAME}-backend
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -201,7 +201,7 @@ endif
 ## shows logs from the nginx container. Use ctrl+c in order to exit
 logs-nginx:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	@docker logs -f nginx
+	@docker logs -f ${COMPOSE_PROJECT_NAME}-nginx
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -211,7 +211,7 @@ endif
 ## shows logs from the supervisord container. Use ctrl+c in order to exit
 logs-supervisord:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	@docker logs -f supervisord
+	@docker logs -f ${COMPOSE_PROJECT_NAME}-supervisord
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
@@ -221,7 +221,7 @@ endif
 ## shows logs from the mysql container. Use ctrl+c in order to exit
 logs-mysql:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
-	@docker logs -f mysql
+	@docker logs -f ${COMPOSE_PROJECT_NAME}-mysql
 else
 	$(ERROR_ONLY_FOR_HOST)
 endif
