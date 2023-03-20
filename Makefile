@@ -180,6 +180,35 @@ key-generate:
 
 
 
+## install npm dependencies
+npm-install:
+	@make exec cmd="npm i"
+
+
+
+## update npm dependencies
+npm-update:
+	@make exec cmd="npm update"
+
+
+
+## build assets
+npm-build:
+	@make exec cmd="npm run build"
+
+
+
+## remove node_modules
+remove-node-modules:
+	@make exec cmd="rm -rf node_modules"
+
+
+
+## install dependencies
+install-dependencies: composer-install npm-install npm-build remove-node-modules
+
+
+
 ## shows Php and Laravel version
 info:
 	@make exec cmd="php artisan --version"
