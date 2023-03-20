@@ -205,7 +205,7 @@ remove-node-modules:
 
 
 ## install dependencies
-install-dependencies: composer-install npm-install npm-build remove-node-modules
+install-dependencies: composer-install-no-dev npm-install npm-build remove-node-modules
 
 
 
