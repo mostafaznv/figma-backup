@@ -14,8 +14,8 @@ ifndef INSIDE_DOCKER_CONTAINER
 	INSIDE_DOCKER_CONTAINER = 0
 endif
 
-HOST_UID := $(shell id -u www-data)
-HOST_GID := $(shell id -g www-data)
+HOST_UID := $(shell id -u)
+HOST_GID := $(shell id -g)
 PHP_USER := -u www-data
 PROJECT_NAME := -p ${COMPOSE_PROJECT_NAME}
 INTERACTIVE := $(shell [ -t 0 ] && echo 1)
