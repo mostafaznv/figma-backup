@@ -1,0 +1,13 @@
+/.git*
+/.idea*
+.dockerignore
+.editorconfig
+storage/mysql-data
+vendor/
+/tools/*/vendor/
+bootstrap/cache
+!bootstrap/cache/.gitignore
+.phpstorm.meta.php
+Dockerfile
+_ide_helper.php
+docker-compose.yml
