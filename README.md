@@ -1,42 +1,58 @@
+# FigmaBackup
 
-## Deploy
 
-1. Install PHP-FPM / MySQL / Nginx / NPM
-2. Install PHP Dependencies
+## Deploy (Docker)
+
+1. Install `docker` and `docker-compose`
+
+2. Create a non-root user and add it to the `docker` group, then switch to the new user
     ```shell
-    composer install --optimize-autoloader --no-dev
+    sudo adduser USERNAME
+    sudo usermod -aG docker USERNAME
+    sudo -su USERNAME
     ```
-3. Install Node Modules
-   ```shell
-   npm install
-   npm run build
-   ```
+
+3. Clone the repository
+
 4. Set Environment Variables
     ```shell
     cp .env.example .env
     ```
-    > Edit `.env` file
+   > Note: Edit the `.env` file
 
-5. Optimizing `routes` and `cache`
+5. Build and Run
     ```shell
-    php artisan key:generate
-    php artisan optimize
+    make build
+    make start
     ```
 
-6. Migrate
+6. Install Dependencies
     ```shell
-    php artisan migrate
+    make install-dependencies
     ```
 
-7. Add Schedule Command to Crontab
+7. Migrate
     ```shell
-    * * * * * cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+    make migrate
+    ```
+   
+8. Generate key
+    ```shell
+    make key-generate
     ```
 
-## Create Admin
-```shell
-php artisan make:admin 
-```
+9. Create Admin
+    ```shell
+    make make-admin
+    ```
+
+10. Open the browser and go to `http://localhost`
+
+## Manually Run Backup Commands
+
+
+## Important ENV keys
+
 
 
 ## License
