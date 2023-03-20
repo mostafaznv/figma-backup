@@ -209,6 +209,12 @@ install-dependencies: composer-install-no-dev npm-install npm-build remove-node-
 
 
 
+## clear laravel cache/routes/config
+laravel-optimize:
+	@make exec cmd="php artisan optimize"
+
+
+
 ## shows Php and Laravel version
 info:
 	@make exec cmd="php artisan --version"
