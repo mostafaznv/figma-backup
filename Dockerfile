@@ -88,7 +88,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 
 # fix no-usable-sandbox for puppeteer
-RUN sysctl -w kernel.unprivileged_userns_clone=1
+RUN echo 'kernel.unprivileged_userns_clone=1' > /etc/sysctl.d/userns.conf
 
 
 # install nodejs and npm
