@@ -7,6 +7,9 @@ services:
         build:
             context: ./docker/
             dockerfile: ./nginx/Dockerfile
+            args:
+                HOST_UID: ${HOST_UID}
+                HOST_GID: ${HOST_GID}
         restart: always
         ports:
             - "${WEB_PORT_HTTP}:80"
