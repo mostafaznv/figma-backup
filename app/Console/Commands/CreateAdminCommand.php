@@ -14,9 +14,9 @@ class CreateAdminCommand extends Command
 
     public function handle(): int
     {
-        $name = $this->ask('Please enter the name:');
-        $email = $this->ask('Please enter the email:');
-        $password = $this->secret('Please enter the password:');
+        $name = $this->ask('Please enter the name');
+        $email = $this->ask('Please enter the email');
+        $password = $this->secret('Please enter the password');
 
         $user = User::query()->firstOrNew([
             'email' => $email
