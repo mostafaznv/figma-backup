@@ -96,26 +96,26 @@ make figma-delete-old-files
 
 ## More Information
 
-### How to get Figma AccessToken
+#### How to get Figma AccessToken
 1. Login to your Figma account.
 2. Head to the account settings from the top-left menu inside Figma.
 3. Find the personal access tokens section.
 4. Click Create new token.
 5. A token will be generated. This will be your only chance to copy the token, so make sure you keep a copy of this in a secure place.
 
-### How to get Figma ProjectId
+#### How to get Figma ProjectId
 To get `project_id` from project page's URL:
 `https://www.figma.com/files/project/{project_id}/{project_name}`
 
-### How to find your Telegram UserId
+#### How to find your Telegram UserId
 1. Open Telegram and search for `@userinfobot`
 2. Send `/start` to the bot
 3. Copy the `ID` value
 
-### How to get Telegram Bot Token
+#### How to get Telegram Bot Token
 Talk to [@BotFather](https://t.me/botfather) and generate a Bot API Token.
 
-### How to get Google reCAPTCHA v2 keys
+#### How to get Google reCAPTCHA v2 keys
 You can obtain them from [here](https://www.google.com/recaptcha/admin)
 
 ## Additional Commands
