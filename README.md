@@ -91,7 +91,6 @@ make figma-delete-old-files
 | TELEGRAM_BOT_TOKEN        | token                                      |                                                                 |
 | NOCAPTCHA_SECRET          | secret                                     | The Google recaptcha (v2) secret key                            |
 | NOCAPTCHA_SITEKEY         | site-key                                   | The Google recaptcha (v2) site key                              |
-| X_SENDFILE_BASE_PATH      | /home/ubuntu/figma-backup/                 | The root path of the project                                    |
 | WEB_PORT_HTTP             | 80                                         | The port of the web server (http)                               |
 
 
