@@ -1,5 +1,12 @@
 # FigmaBackup
 
+FigmaBackup Service is a free, open-source web panel that provides an easy-to-use interface for backing up Figma projects.
+The service is built around the [figma-backup](https://github.com/mimshins/figma-backup) tool, which is a command-line utility that allows you to export your Figma designs as `.fig` files.
+
+With FigmaBackup, you can easily create backups of your Figma projects, manage them, and download them whenever you need to. The service also integrates with Telegram, allowing you to receive download links/files for your backups directly in your Telegram messages. This makes it easy to share backups with your team or clients.
+
+FigmaBackup Service is designed to be reliable and easy to use. It automatically starts the backup process every night at 12:00 AM, ensuring that your backups are always up-to-date. The service also automatically deletes old backups after 10 days, helping you to save storage space and keep your backups organized.
+
 ----
 I develop in an open-source journey 🚀, I wish I lived in an environment where financial situation was fine and I could only focus on the path, but as you may know, life isn't perfect. <br>So if you end up using my packages, please consider making a donation, any amount would go along way and is much appreciated. 🍺
 
