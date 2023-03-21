@@ -112,5 +112,52 @@ Talk to [@BotFather](https://t.me/botfather) and generate a Bot API Token.
 ### How to get Google reCAPTCHA v2 keys
 You can obtain them from [here](https://www.google.com/recaptcha/admin)
 
+## Additional Commands
+```shell
+make build
+make start
+make stop
+make restart
+
+make ssh
+make ssh-nginx
+make ssh-mysql
+make ssh-supervisord
+
+make logs
+make logs-nginx
+make logs-supervisord
+make logs-mysql
+
+make figma-backup
+make figma-delete-old-files
+make make-admin
+
+make composer-install-no-dev
+make composer-install
+make composer-update
+make composer-update-no-dev
+make composer-normalize
+make composer-validate
+
+make npm-install
+make npm-update
+make npm-build
+make remove-node-modules
+
+make install-dependencies
+
+make key-generate
+make laravel-optimize
+make info
+
+make drop-migrate
+make migrate-no-test
+make migrate
+
+make exec
+make exec-bash
+```
+
 ## License
 The FigmaBackup is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

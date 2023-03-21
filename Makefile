@@ -63,12 +63,6 @@ restart: stop start
 
 
 
-## creates config for production environment
-env:
-	@make exec cmd="cp ./.env.example ./.env"
-
-
-
 ## get bash inside backend docker container
 ssh:
 ifeq ($(INSIDE_DOCKER_CONTAINER), 0)
@@ -146,13 +140,6 @@ figma-delete-old-files:
 # make admin
 make-admin:
 	@make exec cmd="php artisan make:admin"
-
-
-
-
-# wait for database
-wait-for-db:
-	@make exec cmd="php artisan db:wait"
 
 
 
@@ -286,12 +273,6 @@ migrate-no-test:
 migrate:
 	@make exec cmd="php artisan migrate --force"
 	@make exec cmd="php artisan migrate --force --env=test"
-
-
-
-## runs all seeds for test database
-seed:
-	@make exec cmd="php artisan db:seed --force"
 
 
 
