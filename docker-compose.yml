@@ -26,6 +26,8 @@ services:
             args:
                 HOST_UID: ${HOST_UID}
                 HOST_GID: ${HOST_GID}
+        cap_add:
+            - SYS_ADMIN
         restart: always
         volumes:
             - .:/var/www/html:cached
