@@ -13,6 +13,9 @@
     ```
 
 3. Clone the repository
+    ```shell
+    git clone https://github.com/mostafaznv/figma-backup.git
+    ```
 
 4. Set Environment Variables
     ```shell
