@@ -174,6 +174,12 @@ composer-update:
 
 
 
+## updates no-dev composer dependencies
+composer-update-no-dev:
+	@make exec-bash cmd="COMPOSER_MEMORY_LIMIT=-1 composer update --no-dev"
+
+
+
 ## sets the application key
 key-generate:
 	@make exec cmd="php artisan key:generate"
