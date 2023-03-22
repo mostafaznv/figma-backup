@@ -93,3 +93,24 @@ if (!function_exists('enumToNames')) {
         return array_column($enums, 'name');
     }
 }
+
+if (!function_exists('maskSensitiveData')) {
+    /**
+     * Mask sensitive data
+     *
+     * @param string $content
+     * @return string
+     */
+    function maskSensitiveData(string $content): string
+    {
+        $figma = config('services.figma');
+        $figma = array_values($figma);
+
+        $telegram = config('services.telegram-bot-api');
+        $telegram = array_values($telegram);
+
+        $sensitiveValues = array_merge($figma, $telegram);
+
+        return str_replace($sensitiveValues, '***', $content);
+    }
+}

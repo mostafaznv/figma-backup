@@ -26,12 +26,13 @@ class WarningNotification extends Notification implements ShouldQueue
     public function toTelegram($notifiable)
     {
         $datetime = now()->toDateTimeString();
+        $message = maskSensitiveData($this->message);
 
         return TelegramMessage::create()
             ->to($notifiable)
             ->content("*Warning* [$this->title]")
             ->line('')
-            ->line($this->message)
+            ->line($message)
             ->line('')
             ->line("*Datetime:* $datetime")
             ->line($this->hashtag);

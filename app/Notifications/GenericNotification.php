@@ -25,12 +25,13 @@ class GenericNotification extends Notification implements ShouldQueue
     public function toTelegram($notifiable)
     {
         $datetime = now()->toFormattedDayDateString();
+        $content = maskSensitiveData($this->content);
 
         return TelegramMessage::create()
             ->to($notifiable)
             ->content("*$this->title*")
             ->line('')
-            ->line("$this->content")
+            ->line($content)
             ->line('')
             ->line("$datetime")
             ->disableNotification();
