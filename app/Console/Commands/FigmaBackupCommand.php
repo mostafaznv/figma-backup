@@ -33,7 +33,7 @@ class FigmaBackupCommand extends Command
 
                 $res->status
                     ? $this->info('✔️ Done')
-                    : $this->error($res->message);
+                    : $this->error('❌ ' . $res->message);
             }
         });
 
