@@ -77,9 +77,11 @@ make figma-delete-old-files
 
 ## Important ENV keys
 
+
 | Key                       | Default Value                              | Description                                                     |
 |---------------------------|--------------------------------------------|-----------------------------------------------------------------|
 | APP_URL                   | https://figma-backup.com                   | The URL of the application                                      |
+| APP_TIMEZONE              | UTC                                        | Application Timezone                                            |
 | DB_DATABASE               | figma-backup                               | The name of the database                                        |
 | DB_PASSWORD               | Z95ikJmR8V879tFcE <br> **Note:** Change it | The password of the database                                    |
 | FIGMA_EMAIL               | username@gmail.com                         | The email of your figma account                                 |
