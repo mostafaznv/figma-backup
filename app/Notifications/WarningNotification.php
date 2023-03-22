@@ -32,7 +32,7 @@ class WarningNotification extends Notification implements ShouldQueue
             ->to($notifiable)
             ->content("*Warning* [$this->title]")
             ->line('')
-            ->line($message)
+            ->escapedLine($message)
             ->line('')
             ->line("*Datetime:* $datetime")
             ->line($this->hashtag);
