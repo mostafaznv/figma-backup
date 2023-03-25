@@ -1,5 +1,7 @@
 # FigmaBackup
 
+<img width="1280" alt="figma-backup" src="https://user-images.githubusercontent.com/7619687/227727452-d041227a-33d6-4303-81dc-1b933ab1d929.png">
+
 FigmaBackup Service is a free, open-source web panel that provides an easy-to-use interface for backing up Figma projects.
 The service is built around the [figma-backup](https://github.com/mimshins/figma-backup) tool, which is a command-line utility that allows you to export your Figma designs as `.fig` files.
 
